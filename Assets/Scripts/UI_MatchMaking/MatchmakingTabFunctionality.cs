@@ -23,10 +23,13 @@ public class MatchmakingTabFunctionality : MonoBehaviour
 
     public void AttemptJoinRoom()
     {
-        if (roomNumInput.GetComponent<InputField>().textComponent.text == "")
+        if (roomNumInput.GetComponent<InputField>().textComponent.text == ""){
             fieldEmptyWarning.SetActive(true);
+            GameObject.FindObjectOfType<AudioManager>().Play("errorClick");
+        }
         else
         {
+            GameObject.FindObjectOfType<AudioManager>().Play("click");
             SceneManager.LoadScene("GameScene");
         }
         

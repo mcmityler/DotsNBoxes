@@ -42,12 +42,15 @@ public class LoginTabFunctionality : MonoBehaviour
     public void AttemptLogin()
     {
         if (usernameInput.GetComponent<InputField>().textComponent.text == "" ||           // Display warning if field empty
-            passwordInput.GetComponent<InputField>().textComponent.text == "")
+            passwordInput.GetComponent<InputField>().textComponent.text == ""){
             fieldEmptyWarning.SetActive(true);
+            GameObject.FindObjectOfType<AudioManager>().Play("errorClick");
+        }
         else
         {
             mainMenuTab.SetActive(true);
             this.gameObject.SetActive(false);
+            GameObject.FindObjectOfType<AudioManager>().Play("click");
         }
 
     }

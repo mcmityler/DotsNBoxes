@@ -34,6 +34,7 @@ public class GameScript : MonoBehaviour
     private int p2Score = 0; //second players points in current game
     private int p1Total = 0;//how many games player 1 has won in total
     private int p2Total = 0;//how many games player 2 has won in total
+    private float tempSliderValue = 2; //temp board size (used to make slider make clicking noises when its value changes)
 
     private enum gamestate {RESTART, PLAYING, GAMEOVER}; //Enum for game state / what point the game is currently at.
     private gamestate currentGamestate= gamestate.RESTART; //Actual reference to current game state
@@ -59,6 +60,10 @@ public class GameScript : MonoBehaviour
             p2ScoreTextbox.text = player2name + "'s score: " + p2Score.ToString();
         }else if(currentGamestate == gamestate.RESTART){  //check if not playing/not started.
             sliderText.text = slider.value.ToString(); //sets the value of the slider to the text box next to it so you know what position youre at on the slider 
+            if(slider.value != tempSliderValue){ //make a clicking noise whenever the slider value changes.
+                tempSliderValue = slider.value;
+                GameObject.FindObjectOfType<AudioManager>().Play("click");
+            }
         }
         if(currentGamestate == gamestate.GAMEOVER){  //check if gamestate is gameover
             if(p1Score > p2Score){ //give out points depending on scores in the CURRENT game.
@@ -92,6 +97,7 @@ public class GameScript : MonoBehaviour
         gamePanel.SetActive(false); //make the panel with inputs invisable
         CreateGame(boardSize); //call function to create board
         currentGamestate = gamestate.PLAYING; //set game state to playing game
+        GameObject.FindObjectOfType<AudioManager>().Play("startClick");
         
     }
     public void RestartButton(){ //function called upon clicking restart button. 

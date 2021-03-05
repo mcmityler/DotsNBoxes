@@ -44,12 +44,15 @@ public class RegistrationFunctionality : MonoBehaviour
     public void AttemptRegistration()
     {
         if (usernameInput.GetComponent<InputField>().textComponent.text == "" ||    // Display warning if field empty
-            passwordInput.GetComponent<InputField>().textComponent.text == "")
+            passwordInput.GetComponent<InputField>().textComponent.text == ""){
             fieldEmptyWarning.SetActive(true);
+            GameObject.FindObjectOfType<AudioManager>().Play("errorClick");
+        }
         else
         {
             registerButton.SetActive(false);
             registeredWarning.SetActive(true);
+            GameObject.FindObjectOfType<AudioManager>().Play("click");
         }
 
     }
